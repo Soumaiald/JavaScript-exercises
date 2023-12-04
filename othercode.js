@@ -1,8 +1,6 @@
-console.log("******************************************** ALAB 308.5.1 - Creating Reusable Functions ***************************************************")
-console.log("************************************* Part 1: Thinking Functionally *******************************************")
 
 function calculSum(arrSum){
-    console.log("calculSum function calculate the sum of the elements of an Array")
+    console.log("This function calculate the sum of the elements of an Array")
     let sum=0
     for (var num of arrSum) {
         sum += num
@@ -11,7 +9,7 @@ function calculSum(arrSum){
 }
 
 function calculAverage(arrAvr){
-    console.log("calculAverage function calculate the average of the elements of an Array")
+    console.log("This function calculate the average of the elements of an Array")
     let len = arrAvr.length
     if (len===0){
         return 0
@@ -20,7 +18,7 @@ function calculAverage(arrAvr){
 }
 
 function longestString(arrString){
-    console.log("longestString function return the longest string of an Array")
+    console.log("This function return the longest string of an Array")
     if (arrString.length===0){
         return null
     } else {
@@ -38,7 +36,7 @@ function longestString(arrString){
 }
 
 function stringLongerThanNum(arrString2, num){
-    console.log("stringLongerThanNum function return a list of strings with a length greater than a given number")
+    console.log("This function return a list of strings with a length greater than a given number")
     let arrRes = []
     for (let i=0; i<arrString2.length; ++i){
         if (arrString2[i].length > num){
@@ -81,7 +79,7 @@ console.log("************************************* Part 3: Thinking Critically *
 
 
 function recursionNum(number){
-    console.log("recursionNum function return numbers between 1 and a given number (using recursion not a loop)")
+    console.log("This function return numbers between 1 and a given number (using recursion not a loop)")
     if(number<=1){
         return 1
     } else {
@@ -90,7 +88,7 @@ function recursionNum(number){
 }
 
 function incrementAge(obj){
-    console.log("incrementAge function incrument the age in an object or created and set it to 0 if the object does not have age key")
+    console.log("This function incrument the age in an object or created and set it to 0 if the object does not have age key")
     if (Object.keys(obj).includes("age")){
         obj["age"] +=1
     } else {
@@ -98,8 +96,6 @@ function incrementAge(obj){
     }
     obj["updated_at"] = new Date()
 }
-
-
 
 var obj1 = {"name":"soumaia", "class": "A"}
 var obj2 = {"name":"loud", "class": "B", "age":26}
@@ -112,4 +108,43 @@ incrementAge(copyObj)
 console.log("Copy obj : " + copyObj.age + " date " + copyObj["updated_at"])
 
 /************************************* Part 5: Thinking Back *******************************************/
-/* The average age can be calculated with reduce method to calculate the sum and divided with the length instead of using a loop*/
+
+
+
+// function compteArea(width, height){
+//     let area = width*height
+//     console.log("The area of a rectangle with a width of " + width + " and a height of "+height+ " is " + area +" square units.")
+// }
+
+// compteArea(5, 7)
+
+
+// function planetHasWater(planet){
+//     if (["earth", "mars"].includes(planet.toLowerCase())) {
+//         return true
+//     } else {
+//         return false
+//     }
+// }
+
+// res = planetHasWater("MArS")
+
+// console.log(res)
+
+    // here, we would process this data to achieve the desired result.
+    // const result = [
+    //   {
+    //     id: 125,
+    //     avg: 0.985, // (47 + 150) / (50 + 150)
+    //     1: 0.94, // 47 / 50
+    //     2: 1.0 // 150 / 150
+    //   },
+    //   {
+    //     id: 132,
+    //     avg: 0.82, // (39 + 125) / (50 + 150)
+    //     1: 0.78, // 39 / 50
+    //     2: 0.833 // late: (140 - 15) / 150
+    //   }
+    // ];
+  
+    // return result;
