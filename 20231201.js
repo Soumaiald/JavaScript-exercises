@@ -78,50 +78,70 @@ const LearnerSubmissions = [
       }
     }
 ];
-  
+//console.log(LearnerSubmissions[0])
 function getLearnerData(course, ag, submissions) {
     
     if (ag.course_id !== course.id){
+        //console.log("learnerScore is : " + learnersScore + "learnersPointPoss is : " + arrPointsPoss)
         throw "Error : mismatching course_id"
     } else {
-        try {
-            let result = []
-            let learnersID = []
+        try { 
             let learnersScore = {}
             let arrPointsPoss = {}
-            for(let learnerSub in submissions){
-                if (ag[learnersScore["learner_id"] - 1]["due_at"] < Date.now()){
-
-                    if (learnerSub["learner_id"] in learnersID) {
-                        if (learnersScore["submission"]["submitted_at"] > ag[learnersScore["learner_id"] - 1]["due_at"]){   
-                            learnersScore["learner_id"].push(learnersScore["submission"]["score"]-0.1*ag[learnersScore["learner_id"] - 1]["points_possible"])
-                            arrPointsPoss["learner_id"].push(ag[learnersScore["learner_id"] - 1]["points_possible"])
+            let idList = []
+            //console.log(learnersScore)
+            //console.log(arrPointsPoss)
+            for(let learnerSub of submissions){
+                //console.log(learnerSub)
+                let learner_id = learnerSub["learner_id"]
+                //console.log(learner_id)
+                let assignment_index = learnerSub["assignment_id"] - 1
+                //console.log(assignment_index)
+                if (idList.includes(learner_id) === false) {
+                    idList.push(learner_id)
+                    learnersScore[learner_id]=[]
+                    arrPointsPoss[learner_id]=[]
+                }
+                //console.log(learnersScore)
+                if (ag.assignments[assignment_index]["due_at"] < "2023-12-04"){
+                    //console.log("due-at" + ag.assignments[assignment_index]["due_at"])
+                    arrPointsPoss[learner_id].push(ag.assignments[assignment_index]["points_possible"])
+                    if (learnerSub["submission"]["submitted_at"] > ag.assignments[assignment_index]["due_at"]){  
+                        //console.log("submitted_at" + learnerSub["submission"]["submitted_at"]) 
+                        learnersScore[learner_id].push(learnerSub["submission"]["score"]-0.1*ag.assignments[assignment_index]["points_possible"])
+                        //console.log(learnersScore)
                     } else {
-                        learnersID.push(learnerSub["learner_id"])
-                        learnersScore["learner_id"]=[learnersScore["submission"]["score"]]
-                        arrPointsPoss["learner_id"]=[]
-                    }
-                    if (learnersScore["submission"]["submitted_at"] < ag[learnersScore["learner_id"] - 1]["due_at"]){
-                        arrPointsPoss["learner_id"].push(learnersScore["submission"]["score"])
-                    } else if (learnersScore["submission"]["submitted_at"] > ag[learnersScore["learner_id"] - 1]["due_at"]){
-    
+                        //console.log("submitted_at" + learnerSub["submission"]["submitted_at"]) 
+                        learnersScore[learner_id].push(learnerSub["submission"]["score"])
+                        //console.log(learnersScore)
                     }
 
                 }
-
-
             }
+            console.log("learnersScore")
+            console.log(learnersScore)
+            console.log("arrPointPossible")
+            console.log(arrPointsPoss)
+            let result = []
+            function add(accumulator, a) {
+                return accumulator + a;
+              }
+            for (let [key, value] of Object.entries(learnersScore)){
+                result.push({"id":key, "avg": value.reduce(add, 0)/arrPointsPoss[key].reduce(add,0)})
+            }
+            console.log("The average score for each learner is")
+            console.log(result)
+        
+        } catch(err) {
+            console.log("There is an Error")
         }
-        catch {
-            console.log("Error Mismatch")
-        }
-            
-
     }
+
+    
 
 }
   
 const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
   
-console.log(result);
+
   
