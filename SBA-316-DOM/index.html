@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ALAB DOM Manipulation</title>
+    <meta charset="UTF-8" />
+  </head>
+
+  <body>
+    <header>
+      <nav id="top-menu"></nav>
+    </header>
+    <main>
+      <div>
+        <input
+          type="text"
+          name="task"
+          placeholder="Enter your new task"
+          required
+          pattern="^[a-zA-Z]+"
+          title="Add your task"
+        />
+        <input
+          type="text"
+          name="description"
+          placeholder="Description"
+          required
+          pattern="^[a-zA-Z]+"
+          title="Add your description"
+        />
+        <input type="submit" />
+      </div>
+    </main>
+
+    <script src="src/index.js"></script>
+  </body>
+</html>
